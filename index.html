@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Shoutbox with Realtime Storage</title>
+		<script type="text/javascript" src="js/xrtml-custom-3.2.0-min.js"></script>
+		<script type="text/javascript" src="https://storage-cdn.realtime.co/storage/1.0.0/realtime-storage-min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css"></link>
+	</head>
+	<body>
+
+		<h1>Shoutbox with Realtime Storage</h1>
+		<p>Basic integration of xRTML Shoutbox with Realtime Storage</p>
+
+		<div id="target-shoutbox"></div>
+
+		<script type="text/html" id="myTemplate">
+			<div class="xrtml-shoutbox">
+				<div class="xrtml-shoutbox-notificationcontainer" data-bind="visible: usersTyping().length > 0">
+					<span class="xrtml-shoutbox-notificationcontainer-userstypinglabel">Users typing: </span>
+					<span class="xRTML-Shoutbox-NotificationContainer-UsersTyping" data-bind="text: usersTyping()"></span>
+				</div>
+				<div class="xrtml-shoutbox-shoutscontainer" data-bind="foreach: messages ">
+					<p class="xrtml-shoutbox-shout">
+						<strong class="xrtml-shoutbox-shout-username" data-bind="text: name"></strong>
+						<span class="xrtml-shoutbox-shout-message" data-bind="text: content"></span>
+					<p>
+				</div>
+				<div class="xrtml-shoutbox-loginform" data-bind="visible: !owner.logged()">
+					<input class="xrtml-shoutbox-loginform-username" type="text" data-bind="value: owner.name"></input>
+					<input class="xrtml-shoutbox-loginform-login" type="button" value="Log In" data-bind="click: logIn"></input>
+				</div>
+				<div class="xrtml-shoutbox-shoutform" data-bind="visible: owner.logged()">
+					<label class="xrtml-shoutbox-shoutform-usernamelabel" data-bind="text: owner.name()"></label>
+					<textarea class="xrtml-shoutbox-shoutform-shoutcontent" data-bind="value: messageContent, userTypingBinding: 3000 " rows="1" cols="50"></textarea>
+					<input class="xrtml-shoutbox-shoutform-send" type="button" value="Send" data-bind="click: sendMessage"></input>
+					<input class="xrtml-shoutbox-shoutform-logout" type="button" value="Log Out" data-bind="click: logOut"></input>
+				</div>
+			</div>
+		</script>
+	</body>
+</html>
